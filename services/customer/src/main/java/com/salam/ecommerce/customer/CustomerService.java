@@ -2,7 +2,6 @@ package com.salam.ecommerce.customer;
 
 import com.salam.ecommerce.exception.CustomerNotFoundException;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
@@ -11,7 +10,7 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-public class CusromerService {
+public class CustomerService {
 
     private final CustomerRepository customerRepository;
     private final CustomerMapper customerMapper;
