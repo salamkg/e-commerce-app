@@ -27,4 +27,10 @@ public class OrderController {
         List<OrderResponse> orders = orderService.findAll();
         return ResponseEntity.ok(orders);
     }
+
+    @GetMapping
+    public ResponseEntity<OrderResponse> findOrderById(@RequestParam("id") Long id) {
+        OrderResponse order = orderService.findById(id);
+        return ResponseEntity.ok(order);
+    }
 }
