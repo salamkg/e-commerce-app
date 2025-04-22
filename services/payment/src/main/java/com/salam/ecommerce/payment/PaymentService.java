@@ -1,6 +1,5 @@
 package com.salam.ecommerce.payment;
 
-import com.salam.ecommerce.PaymentRequest;
 import com.salam.ecommerce.notification.NotificationProducer;
 import com.salam.ecommerce.notification.PaymentNotificationRequest;
 import lombok.RequiredArgsConstructor;

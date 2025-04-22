@@ -1,8 +1,5 @@
-package com.salam.ecommerce;
+package com.salam.ecommerce.payment;
 
-
-import com.salam.ecommerce.payment.Customer;
-import com.salam.ecommerce.payment.PaymentMethod;
 
 import java.math.BigDecimal;
 

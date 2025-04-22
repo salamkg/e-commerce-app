@@ -1,6 +1,5 @@
 package com.salam.ecommerce.payment;
 
-import com.salam.ecommerce.PaymentRequest;
 import org.springframework.stereotype.Service;
 
 @Service

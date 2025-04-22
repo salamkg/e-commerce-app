@@ -1,6 +1,5 @@
 package com.salam.ecommerce.payment;
 
-import com.salam.ecommerce.PaymentRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
