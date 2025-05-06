@@ -28,7 +28,7 @@ public class OrderService {
     private final OrderMapper orderMapper;
     private final OrderLineService orderLineService;
     private final OrderProducer orderProducer;
-    private PaymentClient paymentClient;
+    private final PaymentClient paymentClient;
 
     public Integer createOrder(OrderRequest request) {
         //check customer
