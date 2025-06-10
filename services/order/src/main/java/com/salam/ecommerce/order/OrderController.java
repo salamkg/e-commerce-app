@@ -18,11 +18,11 @@ public class OrderController {
     private OrderService orderService;
 
     @PostMapping
-    public Integer createOrder(@RequestBody @Valid OrderRequest request) {
-        return orderService.createOrder(request);
+    public ResponseEntity<Integer> createOrder(@RequestBody @Valid OrderRequest request) {
+        return ResponseEntity.ok(orderService.createOrder(request));
     }
 
-    @GetMapping
+    @GetMapping("/all")
     public ResponseEntity<List<OrderResponse>> findAllOrders() {
         List<OrderResponse> orders = orderService.findAll();
         return ResponseEntity.ok(orders);

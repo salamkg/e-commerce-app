@@ -1,12 +1,10 @@
 package com.salam.ecommerce.email;
 
-import com.salam.ecommerce.kafka.order.OrderConfirmation;
 import com.salam.ecommerce.kafka.order.Product;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.bouncycastle.util.encoders.UTF8;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.scheduling.annotation.Async;

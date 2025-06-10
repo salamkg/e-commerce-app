@@ -53,14 +53,14 @@ public class OrderService {
             );
         }
         //start payment process
-        var paymentrequest = new PaymentRequest(
+        var paymentRequest = new PaymentRequest(
                 request.amount(),
                 request.paymentMethod(),
                 order.getId(),
                 order.getReference(),
                 customer
         );
-        paymentClient.reguestOrderPayment(paymentrequest);
+        paymentClient.reguestOrderPayment(paymentRequest);
 
         //send order confirmation
         orderProducer.sendOrderConfirmation(
