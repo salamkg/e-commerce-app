@@ -13,7 +13,8 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ProductController {
 
-    private final ProductService productService;
+    @Autowired
+    private ProductService productService;
 
     @PostMapping()
     public ResponseEntity<Integer> createProduct(@RequestBody @Valid ProductRequest productRequest) {

@@ -18,3 +18,8 @@ spring:
         spring.json.type.mapping: paymentConfirmation:com.salam.ecommerce.notification.PaymentNotificationConfirmation
   server:
     port: 8060
+#application:
+#  config:
+#    customer-url: http://localhost:8090/api/v1/customers
+#    payment-url: http://localhost:8060/api/v1/payments
+#    product-url: http://localhost:8050/api/v1/products

@@ -17,4 +17,8 @@ public class Customer {
     private String lastName;
     private String email;
     private Address address;
+
+    public String getId() {
+        return id;
+    }
 }
