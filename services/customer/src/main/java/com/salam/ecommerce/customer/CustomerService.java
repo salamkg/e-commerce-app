@@ -15,7 +15,7 @@ public class CustomerService {
     private final CustomerRepository customerRepository;
     private final CustomerMapper customerMapper;
 
-    public String createCustomer(CustomerRequest customerRequest) {
+    public Long createCustomer(CustomerRequest customerRequest) {
         var customer = customerRepository.save(customerMapper.toCustomer(customerRequest));
         return customer.getId();
     }
@@ -39,9 +39,6 @@ public class CustomerService {
         if (StringUtils.hasText(customerRequest.email())) {
             customer.setEmail(customerRequest.email());
         }
-        if (customerRequest.address() != null) {
-            customer.setAddress(customerRequest.address());
-        }
     }
 
 
@@ -52,12 +49,12 @@ public class CustomerService {
                 .collect(Collectors.toList());
     }
 
-    public Boolean existsById(String customerId) {
+    public Boolean existsById(Long customerId) {
         return customerRepository.findById(customerId)
                 .isPresent();
     }
 
-    public CustomerResponse findById(String customerId) {
+    public CustomerResponse findById(Long customerId) {
         return customerRepository.findById(customerId)
                 .map(customerMapper::fromCustomer)
                 .orElseThrow(() -> new CustomerNotFoundException(
@@ -65,7 +62,7 @@ public class CustomerService {
                 ));
     }
 
-    public void deleteCustomer(String customerId) {
+    public void deleteCustomer(Long customerId) {
         customerRepository.deleteById(customerId);
     }
 }

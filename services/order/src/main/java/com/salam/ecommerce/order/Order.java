@@ -23,16 +23,14 @@ public class Order {
 
     @Id
     @GeneratedValue
-    private int id;
-    private String reference;
-    private BigDecimal totalAmount;
+    private Long id;
 
-    @Enumerated
-    private PaymentMethod paymentMethod;
-    private String customerId;
+    private Long customerId;
+    private Long productId;
+    private int quantity;
 
-    @OneToMany(mappedBy = "order")
-    private List<OrderLine> orderLines;
+    @Enumerated(EnumType.STRING)
+    private OrderStatus status;
 
     @CreatedDate
     @Column(updatable = false, nullable = false)

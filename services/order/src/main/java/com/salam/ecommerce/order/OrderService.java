@@ -30,50 +30,37 @@ public class OrderService {
     private final OrderProducer orderProducer;
     private final PaymentClient paymentClient;
 
-    public Integer createOrder(OrderRequest request) {
+    public OrderResponse createOrder(OrderRequest request) {
         //check customer
-        var customer = customerClient.findCustomerById(request.customerId())
-                .orElseThrow(() -> new BusinessException("Cannot create order with customer id " + request.customerId()));
+        var customer = customerClient.findCustomerById(request.customerId());
+        if (customer.isEmpty()) {
+            throw new BusinessException("Customer not found");
+        }
 
         //purchase products
-        var purchasedProducts = productClient.purchaseProducts(request.products());
+        var product = productClient.getProduct(request.productId());
+        if (product.availableQuantity() < request.quantity()) {
+            throw new BusinessException("Not enough stock for product " + product.name());
+        }
+
+        //decrease stock
+        productClient.decreaseStock(product.id(), request.quantity());
 
         //persist order
-        var order = orderRepository.save(orderMapper.toOrder(request));
+        Order order = Order.builder()
+                .customerId(request.customerId())
+                .productId(request.productId())
+                .quantity(request.quantity())
+                .status(OrderStatus.CREATED)
+                .build();
 
-        //persist order-line
-        for (PurchaseRequest purchaseRequest: request.products()) {
-            orderLineService.saveOrderLine(
-                    new OrderLineRequest(
-                            null,
-                            order.getId(),
-                            purchaseRequest.productId(),
-                            purchaseRequest.quantity()
-                    )
-            );
-        }
-        //start payment process
-        var paymentRequest = new PaymentRequest(
-                request.amount(),
-                request.paymentMethod(),
+        return new OrderResponse(
                 order.getId(),
-                order.getReference(),
-                customer
+                order.getCustomerId(),
+                order.getProductId(),
+                order.getQuantity(),
+                order.getStatus().name()
         );
-        paymentClient.reguestOrderPayment(paymentRequest);
-
-        //send order confirmation
-        orderProducer.sendOrderConfirmation(
-                new OrderConfirmation(
-                        request.reference(),
-                        request.amount(),
-                        request.paymentMethod(),
-                        customer,
-                        purchasedProducts
-                )
-        );
-
-        return order.getId();
     }
 
     public List<OrderResponse> findAll() {

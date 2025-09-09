@@ -4,7 +4,7 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 
 public record CustomerRequest(
-        String id,
+        Long id,
 
         @NotNull
         String firstName,
@@ -14,8 +14,7 @@ public record CustomerRequest(
 
         @NotNull
         @Email
-        String email,
+        String email
 
-        Address address
 ) {
 }
