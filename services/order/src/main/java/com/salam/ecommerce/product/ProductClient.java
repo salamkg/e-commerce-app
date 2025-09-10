@@ -21,13 +21,16 @@ import static org.springframework.http.HttpHeaders.CONTENT_TYPE;
 import static org.springframework.http.HttpMethod.POST;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
-@FeignClient(name = "product-service")
+@FeignClient(
+        name = "product-service",
+        url = "${application.config.product-url}"
+)
 public interface ProductClient {
 
-    @GetMapping("/products/{id}")
+    @GetMapping("/api/v1/products/{id}")
     ProductResponse getProduct(@PathVariable Long id);
 
-    @PutMapping("/products/{id}/decrease-stock")
+    @PutMapping("/api/v1/products/{id}/decrease-stock")
     void decreaseStock(@PathVariable Long id, @RequestParam int quantity);
 
 //    @Value("${application.config.product-url}")

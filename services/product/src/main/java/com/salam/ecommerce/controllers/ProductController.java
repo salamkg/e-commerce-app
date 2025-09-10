@@ -36,6 +36,12 @@ public class ProductController {
         return ResponseEntity.ok(productService.purchaseProducts(requestList));
     }
 
+    @PutMapping("/{product-id}/decrease-stock")
+    public ResponseEntity<Void> decreaseStock(@PathVariable(name = "product-id") int productId, @RequestParam int quantity) {
+        productService.decreaseStock(productId, quantity);
+        return ResponseEntity.ok().build();
+    }
+
     @GetMapping("{product-id}")
     public ResponseEntity<ProductResponse> getProduct(@PathVariable(name = "product-id") int productId) {
         return ResponseEntity.ok(productService.findById(productId));

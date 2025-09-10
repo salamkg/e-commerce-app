@@ -101,4 +101,15 @@ public class ProductService {
                 .map(productMapper::toProductResponse)
                 .collect(Collectors.toList());
     }
+
+    public void decreaseStock(int productId, int quantity) {
+        var product = productRepository.findById(productId)
+                .orElseThrow(() -> new EntityNotFoundException("Product not found with the id:: " + productId));
+        if (product.getAvailableQuantity() < quantity) {
+            throw new ProductPurchaseException("Not enough stock for product " + productId);
+        }
+
+        product.setAvailableQuantity(product.getAvailableQuantity() - quantity);
+        productRepository.save(product);
+    }
 }

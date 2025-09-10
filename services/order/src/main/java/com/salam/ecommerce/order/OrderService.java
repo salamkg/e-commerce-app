@@ -15,6 +15,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -52,7 +53,9 @@ public class OrderService {
                 .productId(request.productId())
                 .quantity(request.quantity())
                 .status(OrderStatus.CREATED)
+                .createdDate(LocalDateTime.now())
                 .build();
+        orderRepository.save(order);
 
         return new OrderResponse(
                 order.getId(),
